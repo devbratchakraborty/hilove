@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Go on a Date With Me? 💝</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Hearts background animation */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 0, 100, 0.7);
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main content card */
+        .proposal-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.3);
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+        .proposal-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .proposal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, #ff4e8d, #ff9a9e);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4e8d;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .couple-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #ffafbd;
+            margin: 25px auto;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+            transition: transform 0.5s, border-color 0.5s;
+        }
+
+        .couple-img:hover {
+            transform: rotate(10deg) scale(1.05);
+            border-color: #ff4e8d;
+        }
+
+        .message {
+            font-size: 1.3rem;
+            color: #555;
+            line-height: 1.8;
+            margin: 25px 0;
+            padding: 0 10px;
+        }
+
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            font-size: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .emoji {
+            animation: bounce 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Date options */
+        .date-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .date-option {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border: none;
+            border-radius: 15px;
+            padding: 18px 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.5);
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .yes-btn {
+            background: linear-gradient(to right, #ff4e8d, #ff9a9e);
+            color: white;
+        }
+
+        .no-btn {
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            letter-spacing: 1px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Celebration effect */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #ff4e8d;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: pulse 1s infinite;
+        }
+
+        .celebration p {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .close-celebration {
+            background: #ff4e8d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-celebration:hover {
+            background: #ff2e7d;
+            transform: scale(1.05);
+        }
+
+        /* Date option selected state */
+        .date-option.selected {
+            background: linear-gradient(to right, #ff4e8d, #ff7eb3);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(255, 20, 147, 0.6);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+                min-width: 160px;
+            }
+            
+            .couple-img {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .emoji-row {
+                font-size: 2rem;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .proposal-card {
+                padding: 30px 20px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .date-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .date-option {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        /* Cursor hearts */
+        .cursor-heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff4e8d;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            animation: cursorHeart 1s forwards;
+        }
+
+        @keyframes cursorHeart {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -100%) scale(1.5); }
+        }
+
+        footer {
+            margin-top: 30px;
+            color: white;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hearts background -->
+    <div class="hearts-bg" id="hearts-bg"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <div class="proposal-card">
+            <h1>Will You Go on a Date With Me? 💝</h1>
+            
+            <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Romantic couple" class="couple-img">
+            
+            <div class="emoji-row">
+                <span class="emoji">🥰</span>
+                <span class="emoji" style="animation-delay: 0.2s">💖</span>
+                <span class="emoji" style="animation-delay: 0.4s">🌹</span>
+                <span class="emoji" style="animation-delay: 0.6s">💑</span>
+                <span class="emoji" style="animation-delay: 0.8s">🎉</span>
+            </div>
+            
+            <p class="message">
+                My dearest, every moment with you feels like a beautiful dream. 💫<br>
+                I've been thinking about how much I'd love to take you out on a special date. <br>
+                Would you do me the honor of spending some beautiful time together? 💕
+            </p>
+            
+            <div class="date-options">
+                <button class="date-option" onclick="selectOption('dinner', this)">
+                    <i class="fas fa-utensils"></i> Romantic Dinner 🍽️
+                </button>
+                <button class="date-option" onclick="selectOption('movie', this)">
+                    <i class="fas fa-film"></i> Movie Night 🎬
+                </button>
+                <button class="date-option" onclick="selectOption('picnic', this)">
+                    <i class="fas fa-tree"></i> Sunset Picnic 🌅
+                </button>
+            </div>
+            
+            <p class="message">
+                Choose your answer below... I'm waiting with bated breath! 😊💗
+            </p>
+            
+            <div class="buttons">
+                <button class="btn yes-btn" id="yes-btn" onclick="showCelebration()">
+                    <i class="fas fa-heart"></i> YES! Absolutely! 🥰
+                </button>
+                <button class="btn no-btn" id="no-btn" onmouseover="moveNoButton()">
+                    <i class="fas fa-sad-tear"></i> Maybe later... 😢
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            Made with <i class="fas fa-heart" style="color:#ff4e8d"></i> for the most special person in my life
+        </footer>
+    </div>
+
+    <!-- Celebration popup -->
+    <div class="celebration" id="celebration">
+        <h2>Yay! You made me the happiest person! 🎉💖</h2>
+        <p id="selected-date-option">I can't wait for our romantic date! I'll make sure it's the most special evening ever. Get ready for lots of love, laughter, and beautiful memories! 💕</p>
+        <div class="emoji-row">
+            <span class="emoji">💑</span>
+            <span class="emoji" style="animation-delay: 0.2s">🎉</span>
+            <span class="emoji" style="animation-delay: 0.4s">🥂</span>
+            <span class="emoji" style="animation-delay: 0.6s">💝</span>
+            <span class="emoji" style="animation-delay: 0.8s">🌟</span>
+        </div>
+        <button class="close-celebration" onclick="closeCelebration()">Close & Continue Celebrating! 🥰</button>
+    </div>
+
+    <script>
+        // Create floating hearts in background
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-bg');
+            const heartCount = window.innerWidth < 768 ? 30 : 50;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                
+                // Random properties
+                const size = Math.random() * 30 + 15;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 4 + 4;
+                
+                heart.style.left = `${left}vw`;
+                heart.style.fontSize = `${size}px`;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Create cursor hearts
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.7) { // 30% chance to create a heart
+                const heart = document.createElement('div');
+                heart.classList.add('cursor-heart');
+                heart.innerHTML = '❤️';
+                
+                heart.style.left = `${e.pageX}px`;
+                heart.style.top = `${e.pageY}px`;
+                
+                document.body.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 1000);
+            }
+        });
+        
+        // Date option selection
+        let selectedOption = 'dinner';
+        
+        function selectOption(option, buttonElement) {
+            selectedOption = option;
+            
+            // Remove selected class from all buttons
+            const buttons = document.querySelectorAll('.date-option');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked button
+            buttonElement.classList.add('selected');
+            
+            // Update celebration message based on selection
+            let message = '';
+            if (option === 'dinner') {
+                message = "I'm so excited for our romantic dinner date! I'll find the most beautiful restaurant with candlelight and soft music. Can't wait to see you dressed up and share a wonderful meal together! 🍷🍽️";
+            } else if (option === 'movie') {
+                message = "Movie night it is! We'll get all the popcorn, snacks, and cuddle up together. I promise to hold your hand during the scary parts and make you laugh during the funny ones! 🍿🎬";
+            } else if (option === 'picnic') {
+                message = "A sunset picnic sounds perfect! I'll pack all your favorite foods, a cozy blanket, and we can watch the sun go down together. It will be a magical evening under the open sky! 🌅🧺";
+            }
+            
+            document.getElementById('selected-date-option').textContent = message;
+        }
+        
+        // Move NO button when hovered
+        function moveNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            const container = document.querySelector('.container');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate random position within container
+            const maxX = containerRect.width - btnRect.width;
+            const maxY = containerRect.height - btnRect.height;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+            noBtn.style.transform = 'scale(1.08)';
+            
+            // Change text temporarily
+            const originalText = noBtn.innerHTML;
+            noBtn.innerHTML = '<i class="fas fa-smile-wink"></i> Just kidding, click YES! 😉';
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                noBtn.style.position = '';
+                noBtn.style.left = '';
+                noBtn.style.top = '';
+                noBtn.style.transform = '';
+                noBtn.innerHTML = originalText;
+            }, 2000);
+        }
+        
+        // Show celebration
+        function showCelebration() {
+            document.getElementById('celebration').style.display = 'flex';
+            
+            // Add extra celebration hearts
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('cursor-heart');
+                    heart.innerHTML = '❤️';
+                    
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    
+                    heart.style.left = `${x}px`;
+                    heart.style.top = `${y}px`;
+                    heart.style.fontSize = `${Math.random() * 30 + 20}px`;
+                    
+                    document.getElementById('celebration').appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 1000);
+                }, i * 100);
+            }
+        }
+        
+        // Close celebration
+        function closeCelebration() {
+            document.getElementById('celebration').style.display = 'none';
+        }
+        
+        // Initialize
+        window.onload = function() {
+            createHearts();
+            
+            // Set default selected option
+            const defaultButton = document.querySelector('.date-option');
+            if (defaultButton) {
+                selectOption('dinner', defaultButton);
+            }
+            
+            // Add click animation to all buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+        };
+        
+        // Add touch support for mobile devices
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
